@@ -1,0 +1,51 @@
+{
+  "name": "modbus-arduino",
+  "keywords": "modbus, serial, ethernet",
+  "description": "Arduino modbus server.",
+  "homepage": "https://github.com/andresarmento/modbus-arduino",
+  "authors":
+  [
+    {
+      "name": "André Sarmento Barbosa",
+      "url": "https://github.com/andresarmento",
+      "maintainer": true
+    },
+    {
+      "name": "Kuba Streit",
+      "url": "https://github.com/cednik",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/cednik/SKU-Gateway.git"
+  },
+  "export": {
+    "include":
+    [
+      "libraries/Modbus/Modbus.cpp"
+    ],
+    "exclude":
+    [
+      "modbus-arduino.cbp",
+      "modbus-arduino.layout"
+    ]
+  },
+  "build":
+  {
+    "flags": [
+      "-Ilibraries/Modbus"
+    ],
+    "extraScript": "interface_selector.py"
+  },
+  "examples": [
+    "libraries/ModbusIP/examples/*",
+    "libraries/ModbusIP_ENC28J60/examples/*",
+    "libraries/ModbusIP_ESP8266AT/examples/*",
+    "libraries/ModbusSerial/examples/*"
+  ],
+  "license": "BSD 3-Clause \"New\" or \"Revised\" License",
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}

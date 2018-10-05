@@ -1,6 +1,6 @@
 /*
     Modbus.cpp - Source for Modbus Base Library
-    Copyright (C) 2014 André Sarmento Barbosa
+    Copyright (C) 2014 Andrï¿½ Sarmento Barbosa
 */
 #include "Modbus.h"
 
@@ -259,7 +259,7 @@ void Modbus::writeMultipleRegisters(byte* frame,word startreg, word numoutputs, 
     }
 
     //Check Address (startreg...startreg + numregs)
-    for (int k = 0; k < numoutputs; k++) {
+    for (word k = 0; k < numoutputs; k++) {
         if (!this->searchRegister(startreg + 40001 + k)) {
             this->exceptionResponse(MB_FC_WRITE_REGS, MB_EX_ILLEGAL_ADDRESS);
             return;
@@ -476,7 +476,7 @@ void Modbus::writeMultipleCoils(byte* frame,word startreg, word numoutputs, byte
     }
 
     //Check Address (startreg...startreg + numregs)
-    for (int k = 0; k < numoutputs; k++) {
+    for (word k = 0; k < numoutputs; k++) {
         if (!this->searchRegister(startreg + 1 + k)) {
             this->exceptionResponse(MB_FC_WRITE_COILS, MB_EX_ILLEGAL_ADDRESS);
             return;

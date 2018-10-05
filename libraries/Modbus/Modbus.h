@@ -1,11 +1,14 @@
 /*
     Modbus.h - Header for Modbus Base Library
-    Copyright (C) 2014 André Sarmento Barbosa
+    Copyright (C) 2014 Andrï¿½ Sarmento Barbosa
 */
-#include "Arduino.h"
 
 #ifndef MODBUS_H
 #define MODBUS_H
+
+#include "Arduino.h"
+
+#undef word
 
 #define MAX_REGS     32
 #define MAX_FRAME   128
@@ -97,5 +100,33 @@ class Modbus {
             word Ireg(word offset);
         #endif
 };
+
+#define MB_SERIAL    1
+#define MB_ETHERNET  2
+#define MB_ENC28J60  3
+#define MB_ESP8266AT 4
+
+#ifndef MODBUS_INTERFACE
+    #error Please define modbus interface (MODBUS_INTERFACE=MB_SERIAL/MB_ETHERNET/MB_ENC28J60/MB_ESP8266AT)!
+#else
+    #if MODBUS_INTERFACE == MB_SERIAL
+        #include <SoftwareSerial.h>
+        #include <ModbusSerial.h>
+    #elif MODBUS_INTERFACE == MB_ETHERNET
+        #include "SPI.h"
+        #include <Ethernet.h>
+        #include <ModbusIP.h>
+    #elif MODBUS_INTERFACE == MB_ENC28J60
+        #include "SPI.h"
+        #include <EtherCard.h>
+        #include <ModbusIP_ENC28J60.h>
+    #elif MODBUS_INTERFACE == MB_ESP8266AT
+        #include <SoftwareSerial.h>
+        #include <ESP8266.h>
+        #include <ModbusIP_ESP8266AT.h>
+    #else
+        #error Selected unsupported modbus interface (MODBUS_INTERFACE=MB_SERIAL/MB_ETHERNET/MB_ENC28J60/MB_ESP8266AT)!
+    #endif
+#endif
 
 #endif //MODBUS_H
